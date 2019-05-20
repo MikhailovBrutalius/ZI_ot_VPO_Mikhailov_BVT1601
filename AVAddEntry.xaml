@@ -1,0 +1,129 @@
+﻿<Window x:Class="AVTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Антивирус" Height="442" Width="576.4">
+
+    <Window.Resources>
+        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0" x:Key="brush">
+            <GradientStop Offset="1.0" Color="White"/>
+            <GradientStop Offset="1" Color="Gray"/>
+        </LinearGradientBrush>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="arial black" />
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="black"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Background" Value="{StaticResource brush}"/>
+
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Arial Black" />
+            <Setter Property="Foreground" Value="black"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Arial Black" />
+            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="22"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource brush}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="209" />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140" />
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="410" VerticalAlignment="Top" Width="542" Grid.ColumnSpan="2" Grid.RowSpan="3" BorderThickness="1" Background="{DynamicResource brush}">
+            <TabItem Header="База данных" Background="lightgray" Margin="125,0,-129,-2">
+                <Grid Background="{DynamicResource brush}" Margin="10,2,-1.4,-2.4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="58*"/>
+                        <ColumnDefinition Width="161*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="178*"/>
+                        <RowDefinition Height="87*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0" Grid.Row="0" Margin="7,7,249.6,97" Grid.ColumnSpan="2">
+                        <TextBlock Text="Имя:"/>
+                        <TextBox x:Name="tbTitle" MaxLength="20" Foreground="#FF040202" Margin="0,0,89.2,0"/>
+                        <TextBlock Text="Диапазон:"/>
+                        <TextBox x:Name="tbOffset" MaxLength="7" Foreground="Black" Margin="0,0,89.2,0"/>
+                        <TextBlock Text="Типы:"/>
+                        <TextBox x:Name="tbTypes" MaxLength="4" Foreground="#FF110606" Margin="0,0,89.2,0"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Margin="7,134,249.6,-0.4" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                        <TextBlock Text="Сигнатура:"/>
+                        <TextBox x:Name="tbSignature" TextWrapping="Wrap" Height="132" Foreground="#FF0B0505" Margin="0,0,-0.8,0" />
+                        <Button x:Name="addEntry" Content="Добавить" Margin="0,8,0,3" Click="addEntry_Click" Height="32" FontFamily="Arial Black"/>
+                        <Button x:Name="saveList" Content="Сохранить" Margin="0,4,0,5" Height="32" Click="saveList_Click" FontFamily="Arial Black"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Margin="81.012,7,-0.4,120" Grid.Column="1">
+                        <TextBlock Text="Выберите вирус:" Margin="74,0,0.2,0"/>
+                        <ListBox x:Name="lbNames" Background="lightgray" Height="104" SelectionChanged="lbNames_SelectionChanged" FontFamily="AnimeAce" Margin="74.4,0,10,0" Foreground="Black" BorderBrush="black" UseLayoutRounding="False"/>
+                    </StackPanel>
+                    <StackPanel Grid.RowSpan="2" Margin="81.012,134,9.6,-0.4" Grid.Column="1" >
+                        <TextBlock Text="Информация:" Margin="74,0,-0.4,0"/>
+                        <TextBox x:Name="tbInfo" TextWrapping="Wrap" Height="90" Text="" Foreground="#FF0C0404" Margin="74,0,-0.4,0"/>
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Проверка на вирусы" Background="lightgray" Margin="131,0,-134.6,-2">
+                <Grid Background="{DynamicResource brush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="85*"/>
+                        <ColumnDefinition Width="276*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox x:Name="lbResultCheck" HorizontalAlignment="Left" Height="247" Margin="10,121,0,0" VerticalAlignment="Top" Width="408" Background="lightgray" BorderBrush="black" Grid.ColumnSpan="2" Foreground="#FF0B0F11"/>
+                    <TextBox x:Name="tbFilenameCheck" HorizontalAlignment="Left" Height="23" Margin="10,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="408" Grid.ColumnSpan="2" Focusable="False" Foreground="#FF120A0A"/>
+                    <Button x:Name="checkFiles" Content="Выбрать файл" HorizontalAlignment="Left" Margin="11,62,0,0" VerticalAlignment="Top" Width="199" Height="23" FontSize="16" Click="checkFiles_Click" Grid.ColumnSpan="2"/>
+                    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,15,0,0" TextWrapping="Wrap" Text="Выбранный объект" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="186"/>
+                    <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="87.8,97,0,0" TextWrapping="Wrap" Text="Вывод" VerticalAlignment="Top" Width="71" Grid.Column="1"/>
+                    <Button x:Name="checkDirectory" Content="Выбрать папку" HorizontalAlignment="Left" Margin="117,62,0,0" VerticalAlignment="Top" Width="199" Height="23" FontSize="16" Click="checkDirectory_Click" Grid.Column="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Отслеживать" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="91" Background="lightgray" Margin="135.6,0,-135.4,0">
+                <Grid Background="{DynamicResource brush}">
+                    <Grid Background="{DynamicResource brush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="85*"/>
+                            <ColumnDefinition Width="276*"/>
+                        </Grid.ColumnDefinitions>
+                        <ListBox x:Name="listBox1" HorizontalAlignment="Left" Height="142" Margin="10,236,0,0" VerticalAlignment="Top" Width="413" Background="#FF464451" BorderBrush="#FF67C9CF" Grid.ColumnSpan="2" Foreground="#FF67A7CF"/>
+                        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="10,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="322" Grid.ColumnSpan="2" Focusable="False"/>
+                        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,15,0,0" TextWrapping="Wrap" Text="Выбранный объект" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="186"/>
+                        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="10,217,0,0" TextWrapping="Wrap" Text="Вывод" VerticalAlignment="Top" Width="49"/>
+                        <Grid Background="{DynamicResource brush}" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="102*"/>
+                                <ColumnDefinition Width="119*"/>
+                                <ColumnDefinition Width="212*"/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox x:Name="lbResultWatch" HorizontalAlignment="Left" Height="165" Margin="10,203,0,0" VerticalAlignment="Top" Width="408" Background="lightgray" BorderBrush="black" Grid.ColumnSpan="3" Foreground="#FF0C1216"/>
+                            <TextBox x:Name="tbDirNameWatch" HorizontalAlignment="Left" Height="23" Margin="10,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="322" Grid.ColumnSpan="3" Focusable="False" Foreground="#FF0E0404"/>
+                            <Button x:Name="addWatch" Content="Открыть" Grid.Column="2" HorizontalAlignment="Left" Margin="116,34,0,0" VerticalAlignment="Top" Width="81" Height="23" FontSize="16" Click="addWatch_Click"/>
+                            <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="10,15,0,0" TextWrapping="Wrap" Text="Выбранный объект" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="186"/>
+                            <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="10,179,0,0" TextWrapping="Wrap" Text="Вывод" VerticalAlignment="Top" Width="68"/>
+                            <ListBox x:Name="lbDirWatch" HorizontalAlignment="Left" Height="81" Margin="10,93,0,0" VerticalAlignment="Top" Width="408" Background="lightgray" BorderBrush="black" Grid.ColumnSpan="3" Foreground="#FF091014"/>
+                            <TextBlock x:Name="textBlock5_Copy" HorizontalAlignment="Left" Margin="10,74,0,0" TextWrapping="Wrap" Text="Отслеживаемые папки" VerticalAlignment="Top" Width="261" Grid.ColumnSpan="3"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
